@@ -8,7 +8,7 @@ URL:		http://www.gadmintools.org/
 Source0:	http://mange.dynalias.org/linux/%{name}/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
 BuildRequires:	gtk+2-devel
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 BuildRequires:  desktop-file-utils
 Requires:	bind >= 9.3.2
 Requires:	usermode-consoleonly
