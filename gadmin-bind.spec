@@ -1,8 +1,12 @@
+# if I fix the string literal errors according to the wiki Problems
+# page, it crashes on startup - AdamW 2009/01
+%define Werror_cflags %nil
+
 Summary:	A GTK+ administation tool for ISC BIND
 Name:		gadmin-bind
 Version:	0.2.3
-Release:	%mkrel 2
-License:	GPL
+Release:	%mkrel 3
+License:	GPLv3+
 Group:		System/Configuration/Networking
 URL:		http://www.gadmintools.org/
 Source0:	http://mange.dynalias.org/linux/%{name}/%{name}-%{version}.tar.gz
@@ -17,15 +21,13 @@ Provides:	gbindadmin
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-GBINDADMIN is a fast and easy to use GTK+ administration tool for
+Gadmin-Bind is a fast and easy to use GTK+ administration tool for
 ISC BIND.
 
 %prep
-
 %setup -q
 
 %build
-
 %configure2_5x
 
 perl -pi -e 's|^#define CHROOT_PATH .*|#define CHROOT_PATH \"%{_localstatedir}/lib/named-chroot\"|g' config.h
@@ -51,26 +53,26 @@ install -m 644 etc/security/console.apps/%{name} %{buildroot}%{_sysconfdir}/secu
 # locales
 %find_lang %name
 
-# Mandrake Icons
-install -d %{buildroot}%{_iconsdir}
-install -d %{buildroot}%{_miconsdir}
-install -d %{buildroot}%{_liconsdir}
-convert -geometry 48x48 pixmaps/%{name}.png %{buildroot}%{_liconsdir}/%{name}.png
-convert -geometry 32x32 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/%{name}.png
-convert -geometry 16x16 pixmaps/%{name}.png %{buildroot}%{_miconsdir}/%{name}.png
+# Icons
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+convert -geometry 48x48 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/%{name}.png
+convert -geometry 32x32 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/%{name}.png
+convert -geometry 16x16 pixmaps/%{name}.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/%{name}.png
 
 # Menu
 mkdir -p %{buildroot}%{_datadir}/applications
+sed -i -e 's,%{name}.png,%{name},g' desktop/%{name}.desktop
+sed -i -e 's,GADMIN-BIND,Gadmin-Bind,g' desktop/%{name}.desktop
 mv desktop/%{name}.desktop %{buildroot}%{_datadir}/applications/%{name}.desktop
-perl -pi -e 's,%{name}.png,%{name},g' %{buildroot}%{_datadir}/applications/*
 desktop-file-install --vendor="" \
     --remove-category="Application" \
     --add-category="Settings;Network;GTK;" \
     --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/*
 
 # Prepare usermode entry
+mkdir -p %{buildroot}%{_bindir}
 mv %{buildroot}%{_sbindir}/%{name} %{buildroot}%{_sbindir}/%{name}.real
-ln -s %{_bindir}/consolehelper %{buildroot}%{_sbindir}/%{name}
+ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/%{name}
 
 mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps
 cat > %{buildroot}%{_sysconfdir}/security/console.apps/%{name} <<_EOF_
@@ -99,13 +101,11 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/pam.d/%{name}
 %config(noreplace) %{_sysconfdir}/security/console.apps/%{name}
 %dir %{_sysconfdir}/%{name}
-%{_sbindir}/%{name}
+%{_bindir}/%{name}
 %{_sbindir}/%{name}.real
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/*.png
 %{_datadir}/pixmaps/%{name}/*.png
 %{_datadir}/pixmaps/%{name}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_miconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
+%{_iconsdir}/hicolor/*/apps/%{name}.png
 
