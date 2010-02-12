@@ -4,8 +4,8 @@
 
 Summary:	A GTK+ administation tool for ISC BIND
 Name:		gadmin-bind
-Version:	0.2.3
-Release:	%mkrel 4
+Version:	0.2.4
+Release:	%mkrel 1
 License:	GPLv3+
 Group:		System/Configuration/Networking
 URL:		http://www.gadmintools.org/
@@ -106,6 +106,5 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/*.png
 %{_datadir}/pixmaps/%{name}/*.png
-%{_datadir}/pixmaps/%{name}/%{name}.png
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 
