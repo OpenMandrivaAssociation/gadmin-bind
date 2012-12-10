@@ -108,3 +108,43 @@ rm -rf %{buildroot}
 %{_datadir}/pixmaps/%{name}/*.png
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 
+
+
+%changelog
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 0.2.5-2mdv2011.0
++ Revision: 610785
+- rebuild
+
+* Sun Mar 21 2010 Funda Wang <fwang@mandriva.org> 0.2.5-1mdv2010.1
++ Revision: 525948
+- update to new version 0.2.5
+
+* Fri Feb 12 2010 Funda Wang <fwang@mandriva.org> 0.2.4-1mdv2010.1
++ Revision: 504474
+- new version 0.2.4
+
+* Fri Sep 11 2009 Thierry Vignaud <tv@mandriva.org> 0.2.3-4mdv2010.0
++ Revision: 437612
+- rebuild
+
+* Sun Jan 04 2009 Adam Williamson <awilliamson@mandriva.org> 0.2.3-3mdv2009.1
++ Revision: 324131
+- install consolehelper link to /usr/bin not /usr/sbin, so it works right
+- don't use ALL CAPS in menu entry
+- fd.o icons
+- clean description a bit
+- new license policy
+- disable Werror (if I try and fix it, it crashes on startup)
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Tue Sep 09 2008 Emmanuel Andry <eandry@mandriva.org> 0.2.3-2mdv2009.0
++ Revision: 283233
+- fix consolehelper
+
+* Tue Sep 09 2008 Emmanuel Andry <eandry@mandriva.org> 0.2.3-1mdv2009.0
++ Revision: 283212
+- import gadmin-bind
+
+
