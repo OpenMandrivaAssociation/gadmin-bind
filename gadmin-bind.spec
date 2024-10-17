@@ -8,7 +8,7 @@ Version:	0.2.5
 Release:	3
 License:	GPLv3+
 Group:		System/Configuration/Networking
-URL:		http://www.gadmintools.org/
+URL:		https://www.gadmintools.org/
 Source0:	http://mange.dynalias.org/linux/%{name}/%{name}-%{version}.tar.gz
 Source1:	%{name}.pam
 BuildRequires:	gtk+2-devel
